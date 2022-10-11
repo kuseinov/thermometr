@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./components/Css.css";
 
 function App() {
+  const [temperatureValue, setTemperatureValue] = useState(10);
+  const[temperatureColor,setTemperatureColor]=useState("cold")
+
+const incriment=()=>{
+  if(temperatureValue >=30) return
+  const newTemperature=temperatureValue +1
+  setTemperatureValue(newTemperature)
+if (newTemperature >=15){
+  setTemperatureColor('hot')
+}
+
+
+}
+
+const dicriment=()=>{
+  if(temperatureValue <=0)return
+  const newTemperature=temperatureValue -1
+  setTemperatureValue(newTemperature)
+  if (newTemperature <15){
+    
+    setTemperatureColor('cold')
+    
+  }
+}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <div className="temperature-display-container">
+        <div className={`temperature-display ${temperatureColor}`}>
+        {temperatureValue} C</div>
+      </div>
+      <div className="button-container"></div>
+      <button 
+      onClick={()=>incriment()}>+</button>
+      <button
+        onClick={()=>dicriment()}>-</button>
     </div>
   );
 }
